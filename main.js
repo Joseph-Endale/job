@@ -23,8 +23,7 @@ function profileToggle() {
  * ### Modals ###
  */
 
-function toggleModal(action, elem_trigger)
-{
+function toggleModal(action, elem_trigger) {
     elem_trigger.addEventListener('click', function () {
         if (action == 'add') {
             let modal_id = this.dataset.modal;
@@ -39,13 +38,12 @@ function toggleModal(action, elem_trigger)
 
 
 // Check if there is modals on the page
-if (document.querySelector('.modal-wrapper'))
-{
+if (document.querySelector('.modal-wrapper')) {
     // Open the modal
     document.querySelectorAll('.modal-trigger').forEach(btn => {
         toggleModal('add', btn);
     });
-    
+
     // close the modal
     document.querySelectorAll('.close-modal').forEach(btn => {
         toggleModal('remove', btn);

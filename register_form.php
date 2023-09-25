@@ -1,8 +1,8 @@
 <?php
 
-@include 'config.php';
+@include 'config1.php';
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -14,21 +14,19 @@ if(isset($_POST['submit'])){
 
    $result = mysqli_query($conn, $select);
 
-   if(mysqli_num_rows($result) > 0){
+   if (mysqli_num_rows($result) > 0) {
 
       $error[] = 'user already exist!';
+   } else {
 
-   }else{
-
-      if($pass != $cpass){
+      if ($pass != $cpass) {
          $error[] = 'password not matched!';
-      }else{
+      } else {
          $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
          mysqli_query($conn, $insert);
-         header('location:login_form.php');
+         header('location:index.php');
       }
    }
-
 };
 
 
@@ -36,6 +34,7 @@ if(isset($_POST['submit'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,32 +45,34 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="css/style copy.css">
 
 </head>
+
 <body>
-   
-<div class="form-container">
 
-   <form  method="post">
-      <h3>register now</h3>
-      <?php
-      if(isset($error)){
-         foreach($error as $error){
-            echo '<span class="error-msg">'.$error.'</span>';
+   <div class="form-container">
+
+      <form method="post">
+         <h3>register now</h3>
+         <?php
+         if (isset($error)) {
+            foreach ($error as $error) {
+               echo '<span class="error-msg">' . $error . '</span>';
+            };
          };
-      };
-      ?>
-      <input type="text" name="name" required placeholder="enter your name">
-      <input type="email" name="email" required placeholder="enter your email">
-      <input type="password" name="password" required placeholder="enter your password">
-      <input type="password" name="cpassword" required placeholder="confirm your password">
-      <select name="user_type">
-         <option value="user">user</option>
-         <option value="admin">admin</option>
-      </select>
-      <input type="submit" name="submit" value="register now" class="form-btn">
-      <p>already have an account? <a href="index.php">login now</a></p>
-   </form>
+         ?>
+         <input type="text" name="name" required placeholder="enter your name">
+         <input type="email" name="email" required placeholder="enter your email">
+         <input type="password" name="password" required placeholder="enter your password">
+         <input type="password" name="cpassword" required placeholder="confirm your password">
+         <select name="user_type">
+            <option value="user">admin</option>
+            <option value="admin"></option>
+         </select>
+         <input type="submit" name="submit" value="register now" class="form-btn">
+         <p>already have an account? <a href="index.php">login now</a></p>
+      </form>
 
-</div>
+   </div>
 
 </body>
+
 </html>
